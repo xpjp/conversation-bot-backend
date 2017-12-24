@@ -8,16 +8,16 @@ class Psgr(object):
     # コンストラクタ
     def __init__(self):
         super(Psgr, self).__init__()
-        self.__connection = psycopg2.connect("host=localhost port=5432 dbname=text_analyze user=ryo password=3tfif2DJZEW64W3bsL9Z8af8qAoEM9cUGbzChcraVqvJzAZ6ca")
+        self.__connection = psycopg2.connect("host=localhost port=5432 dbname=analyze_db user=xpjp password=9w8w3Tz9O28y1308")
         self.cur = self.__connection.cursor()
         # print self.__connection.get_backend_pid()
-        print "***Hello Psgr!***"
+        print ("***Hello Psgr!***")
 
     # デストラクタ
     def __del__(self):
         self.cur.close()
         self.__connection.close()
-        print "***Bye Psgr!***"
+        print ("***Bye Psgr!***")
 
     def getCur(self):
         return self.cur
@@ -32,6 +32,9 @@ class Psgr(object):
 
     def lastrowid(self):
         return self.cur.fetchone()[0]
+
+    def fetchall(self):
+        return self.cur.fetchall()
 
     def getParseData(self,value):
         sentence_word_array = []
@@ -49,11 +52,11 @@ class Psgr(object):
             sentence_word_dic['part_of_speech'] = row[3]
             sentence_word_dic['part_of_speech_detail1'] = row[4]
             sentence_word_array.append(sentence_word_dic)
-            print row[0]
-            print row[1]
-            print row[2]
-            print row[3]
-            print row[4]
+            print (row[0])
+            print (row[1])
+            print (row[2])
+            print (row[3])
+            print (row[4])
         # print sentence_word_array
         return sentence_word_array
 
@@ -77,12 +80,12 @@ class Psgr(object):
 
 
 
-# psgr = Psgr()
-# cur = psgr.getCur()
+psgr = Psgr()
+cur = psgr.getCur()
 #
-# cur.execute("select * from users")
-# for row in cur:
-#     print(row)
+cur.execute("select * from sentences")
+for row in cur:
+    print(row)
 #
 # psgr.dbCommit()
 

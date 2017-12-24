@@ -1,46 +1,55 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import sys
-sys.path.append('/Users/ryo/analyze_tweet/mecab-python-0.996')
-
 import MeCab
 import string
-
-# sentence = "太郎はこの本を二郎を見た女性に渡した。"
 
 class Analyze(object):
     """docstring for Analyze"""
     def __init__(self):
         super(Analyze, self).__init__()
-        self.tagger = MeCab.Tagger("-Odump")
+        self.taggerdump = MeCab.Tagger("-Odump")
+        self.taggerwakati = MeCab.Tagger("-Owakati")
         self.dictionary_info = None
-        print "***Hello Analyze!***"
+        print ("***Hello Analyze!***")
 
     # デストラクタ
     def __del__(self):
-        print "***Bye Analyze!***"
+        print ("***Bye Analyze!***")
 
     def get_version(self):
-        return "Mecab Version:" + str(MeCab.VERSION)
+        return ("Mecab Version:" + str(MeCab.VERSION))
 
     def parse_sentence(self,sentence):
         try:
-            node = self.tagger.parseToNode(sentence)
+            node = self.taggerdump.parseToNode(sentence)
             array = []
             while node:
-                # print node.surface
-                # print node.feature
+                print (node.surface)
+                print (node.feature)
                 array.append((node.surface, node.feature))
                 node = node.next
             return array
-        except RuntimeError, e:
-            print "RuntimeError:", e;
+        except RuntimeError:
+            print ("RuntimeError:", e);
 
+    def parse_wakati_sentence(self,sentence):
+        try:
+            node = self.taggerwakati.parseToNode(sentence)
+            array = []
+            while node:
+                print (node.surface)
+                print (node.feature)
+                array.append((node.surface, node.feature))
+                node = node.next
+            return array
+        except RuntimeError:
+            print ("RuntimeError:", e);
 
-
-# analyze = Analyze("太郎はこの本を二郎を見た女性に渡した。")
-# print analyze.get_version()
-# analyze.parse_sentence()
+sentence = "すもももももももものうち"
+analyze = Analyze()
+print (analyze.get_version())
+analyze.parse_sentence(sentence)
 
 
 
