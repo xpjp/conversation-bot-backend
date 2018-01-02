@@ -80,13 +80,13 @@ class Psgr(object):
 
 
 
-psgr = Psgr()
-cur = psgr.getCur()
-#
-cur.execute("select * from sentences")
-for row in cur:
-    print(row)
-#
+# psgr = Psgr()
+# cur = psgr.getCur()
+# #
+# cur.execute("select * from sentences")
+# for row in cur:
+#     print(row)
+# 
 # psgr.dbCommit()
 
 # cur.execute("insert into users (name,score,team) values('sato',9.2,'red')")
