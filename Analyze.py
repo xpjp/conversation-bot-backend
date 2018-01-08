@@ -22,34 +22,34 @@ class Analyze(object):
 
     def parse_sentence(self,sentence):
         try:
+            self.taggerwakati.parse('')
             node = self.taggerdump.parseToNode(sentence)
             array = []
             while node:
-                print (node.surface)
-                print (node.feature)
+                print(node.surface + '\t' + node.feature)
                 array.append((node.surface, node.feature))
                 node = node.next
             return array
-        except RuntimeError:
+        except RuntimeError as e:
             print ("RuntimeError:", e);
 
     def parse_wakati_sentence(self,sentence):
         try:
+            self.taggerwakati.parse('')
             node = self.taggerwakati.parseToNode(sentence)
             array = []
             while node:
-                print (node.surface)
-                print (node.feature)
+                print(node.surface + '\t' + node.feature)
                 array.append((node.surface, node.feature))
                 node = node.next
             return array
-        except RuntimeError:
+        except RuntimeError as e:
             print ("RuntimeError:", e);
 
-sentence = "すもももももももものうち"
-analyze = Analyze()
-print (analyze.get_version())
-analyze.parse_sentence(sentence)
+# sentence = "すもももももももものうち"
+# analyze = Analyze()
+# print (analyze.get_version())
+# analyze.parse_sentence(sentence)
 
 
 
