@@ -2,6 +2,7 @@
 create table sentences (
     sentence_id serial primary key,
     sentence varchar(255) not null,
+    channel varchar(255) not null,
     create_date timestamp default CURRENT_TIMESTAMP,/*作成日時*/
     update_date timestamp default CURRENT_TIMESTAMP/*更新日時*/
 );
@@ -29,6 +30,7 @@ create table sentence_word (
     sentence_word_id serial primary key,
     sentence_id int not null,
     word_id int not null,
+    channel varchar(255) not null,
     create_date timestamp default CURRENT_TIMESTAMP,/*作成日時*/
     update_date timestamp default CURRENT_TIMESTAMP/*更新日時*/
 );
@@ -41,9 +43,10 @@ create table markov_chain (
     word1 varchar(255) not null,
     word2 varchar(255) not null,
     word3 varchar(255) not null,
+    channel varchar(255) not null,
     create_date timestamp default CURRENT_TIMESTAMP,/*作成日時*/
     update_date timestamp default CURRENT_TIMESTAMP/*更新日時*/
 );
 
 -- 検索用にindexを生成
-create index word2_index on markov_chain(word2);
+create index word2_index on markov_chain(word2, channel);
