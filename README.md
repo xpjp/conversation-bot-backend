@@ -8,7 +8,7 @@ Twitterからツイートを取得して、形態素解析を行い、マルコ�
 create table sentences (
     sentence_id serial primary key,
     sentence varchar(255) not null,
-    channelid bigint not null,
+    channel_id bigint not null,
     create_date timestamp default CURRENT_TIMESTAMP,/*作成日時*/
     update_date timestamp default CURRENT_TIMESTAMP/*更新日時*/
 );
@@ -36,7 +36,7 @@ create table sentence_word (
     sentence_word_id serial primary key,
     sentence_id int not null,
     word_id int not null,
-    channelid bigint not null,
+    channel_id bigint not null,
     create_date timestamp default CURRENT_TIMESTAMP,/*作成日時*/
     update_date timestamp default CURRENT_TIMESTAMP/*更新日時*/
 );
@@ -46,22 +46,23 @@ create table sentence_word (
 
 create table markov_chain (
     markov_chain_id serial primary key,
+    sentence_id bigint not null,
     word1 varchar(255) not null,
     word2 varchar(255) not null,
     word3 varchar(255) not null,
-    channelid bigint not null,
+    channel_id bigint not null,
     create_date timestamp default CURRENT_TIMESTAMP,/*作成日時*/
     update_date timestamp default CURRENT_TIMESTAMP/*更新日時*/
 );
 
 #### 検索用にindexを生成
-create index word2_index on markov_chain(word2, channelid);
+create index word2_index on markov_chain(word2, channel_id);
 
 ### Discordチャネル
 
 create table channels (
   channels_id serial primary key,
-  channelid bigint not null,/*チャネルID*/
+  channel_id bigint not null,/*チャネルID*/
   channel varchar(255) not null,/*チャネル名*/
   create_date timestamp default CURRENT_TIMESTAMP,/*作成日時*/
   update_date timestamp default CURRENT_TIMESTAMP/*更新日時*/
