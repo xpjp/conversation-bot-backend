@@ -51,8 +51,6 @@ class Analyze(object):
 # print (analyze.get_version())
 # analyze.parse_sentence(sentence)
 
-
-
 # try:
 #     t = MeCab.Tagger (" ".join(sys.argv))
 #     print t.parse(sentence)
